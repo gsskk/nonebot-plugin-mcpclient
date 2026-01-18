@@ -1,8 +1,9 @@
 """Plugin configuration."""
 
-from typing import Literal
+import json
+from typing import Any, Literal
 
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, Field, field_validator
 
 
 class MCPServerConfig(BaseModel):
@@ -36,6 +37,9 @@ class MCPServerConfig(BaseModel):
     description: str | None = None
     enabled: bool = True
 
+    # 权限控制 (可选)
+    allowed_users: list[str] = Field(default_factory=list)
+
 
 class Config(BaseModel):
     """插件全局配置.
@@ -49,3 +53,11 @@ class Config(BaseModel):
     mcp_servers: dict[str, MCPServerConfig] = Field(default_factory=dict)
     mcp_tool_timeout: int = 30
     mcp_cache_ttl: int = 3600
+
+    @field_validator("mcp_servers", mode="before")
+    @classmethod
+    def parse_mcp_servers(cls, v: Any) -> dict[str, Any]:
+        """Parse mcp_servers from JSON string if needed."""
+        if isinstance(v, str):
+            return json.loads(v)
+        return v

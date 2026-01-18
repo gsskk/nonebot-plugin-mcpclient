@@ -95,6 +95,38 @@ MCP_CACHE_TTL=3600
 > - `sse`：使用 GET 请求建立 SSE 流，适用于大多数开源 MCP 服务器
 > - `streamablehttp`：使用 POST 请求，支持双向通信，适用于企业级 MCP 服务（如麦当劳）
 
+### 权限控制 (可选)
+
+可以通过 `allowed_users` 字段限制 MCP 服务器只对特定用户可用，支持 fnmatch 通配符模式：
+
+```json
+{
+  "mcd": {
+    "type": "streamablehttp",
+    "url": "https://mcp.mcd.cn/mcp-servers/mcd-mcp",
+    "headers": {"Authorization": "Bearer xxx"},
+    "friendly_name": "麦当劳",
+    "allowed_users": [
+      "onebotv11+private+123456789",
+      "onebotv11+*+987654321",
+      "discord+*"
+    ]
+  }
+}
+```
+
+**Session ID 格式**：`{adapter}+{target}+{user_id}`
+- 私聊：`onebotv11+private+123456789`
+- 群聊：`onebotv11+123456+789012345`
+
+**通配符示例**：
+- `onebotv11+*+123456789` - 某用户在所有群/私聊
+- `discord+*` - 所有 Discord 用户
+- `*+*+123456789` - 跨适配器的特定用户
+
+> [!TIP]
+> 如果未配置 `allowed_users` 或配置为空列表，则所有用户都可访问（向后兼容）。
+
 ## 🎉 使用指南
 
 ### 命令调用

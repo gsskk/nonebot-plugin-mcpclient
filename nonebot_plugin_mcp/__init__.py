@@ -59,19 +59,26 @@ async def _startup() -> None:
 # ============ 对外 API ============
 
 
-async def get_mcp_tools() -> list[dict[str, Any]]:
+async def get_mcp_tools(user_id: str | None = None) -> list[dict[str, Any]]:
     """获取所有 MCP 工具 (OpenAI function calling 格式).
+
+    Args:
+        user_id: 用户 Session ID，用于权限过滤 (可选)
 
     Returns:
         工具列表，每个工具包含 type, function.name, function.description, function.parameters
     """
-    return await _client.get_tools()
+    from .permission import filter_tools_by_permission
+
+    tools = await _client.get_tools()
+    return filter_tools_by_permission(tools, user_id)
 
 
 async def call_mcp_tool(
     tool_name: str,
     args: dict[str, Any],
     timeout: float | None = None,
+    user_id: str | None = None,
 ) -> str:
     """调用 MCP 工具.
 
@@ -79,10 +86,24 @@ async def call_mcp_tool(
         tool_name: 工具名，格式为 mcp__server__tool
         args: 工具参数字典
         timeout: 超时时间（秒），默认使用配置值
+        user_id: 用户 Session ID，用于权限校验 (可选)
 
     Returns:
         工具调用结果字符串
     """
+    from .permission import check_server_permission
+
+    # 解析 server name 进行权限检查
+    if tool_name.startswith("mcp__"):
+        parts = tool_name.split("__")
+        if len(parts) >= 2:
+            server_name = parts[1]
+            config = _client._server_config.get(server_name)
+            if config and config.allowed_users and user_id:
+                if not check_server_permission(server_name, user_id):
+                    logger.warning(f"[MCP] Permission denied: {user_id} -> {tool_name}")
+                    return f"权限不足：您无权访问 {server_name} 服务器"
+
     return await _client.call_tool(tool_name, args, timeout)
 
 

@@ -1,5 +1,5 @@
 [project]
-name = "nonebot-plugin-mcp"
+name = "nonebot-plugin-mcpclient"
 version = "0.1.0"
 description = "NoneBot2 MCP Client Plugin - 提供 MCP 工具调用能力"
 readme = "README.md"
@@ -26,7 +26,7 @@ dev = [
 ]
 
 [tool.nonebot]
-plugins = ["nonebot_plugin_mcp"]
+plugins = ["nonebot_plugin_mcpclient"]
 
 [build-system]
 requires = ["hatchling"]

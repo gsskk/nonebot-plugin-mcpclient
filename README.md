@@ -1,4 +1,4 @@
-# nonebot-plugin-mcp
+# nonebot-plugin-mcpclient
 
 NoneBot2 MCP (Model Context Protocol) 客户端插件，提供 MCP 工具调用能力。
 
@@ -7,7 +7,7 @@ NoneBot2 MCP (Model Context Protocol) 客户端插件，提供 MCP 工具调用�
 ## 💿 安装
 
 ```bash
-pip install nonebot-plugin-mcp
+pip install nonebot-plugin-mcpclient
 ```
 
 ## ⚙️ 配置
@@ -144,7 +144,7 @@ MCP_CACHE_TTL=3600
 ### API 调用
 
 ```python
-from nonebot_plugin_mcp import get_mcp_tools, call_mcp_tool, is_mcp_tool
+from nonebot_plugin_mcpclient import get_mcp_tools, call_mcp_tool, is_mcp_tool
 
 # 获取所有工具 (OpenAI function calling 格式)
 tools = await get_mcp_tools()

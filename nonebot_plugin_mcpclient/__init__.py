@@ -25,14 +25,14 @@ __plugin_meta__ = PluginMetadata(
     description="NoneBot2 MCP 客户端插件，提供 MCP 工具调用能力",
     usage=(
         "API 使用:\n"
-        "  from nonebot_plugin_mcp import get_mcp_tools, call_mcp_tool\n"
+        "  from nonebot_plugin_mcpclient import get_mcp_tools, call_mcp_tool\n"
         "  tools = await get_mcp_tools()\n"
         "  result = await call_mcp_tool('mcp__server__tool', {...})\n\n"
         "命令使用:\n"
         "  /mcp <server> <tool> [args] - 调用 MCP 工具"
     ),
     type="library",
-    homepage="https://github.com/gsskk/nonebot-plugin-mcp",
+    homepage="https://github.com/gsskk/nonebot-plugin-mcpclient",
     config=Config,
     supported_adapters=inherit_supported_adapters("nonebot_plugin_alconna"),
 )

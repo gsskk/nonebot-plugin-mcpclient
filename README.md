@@ -2,7 +2,7 @@
 
 NoneBot2 MCP (Model Context Protocol) 客户端插件，提供 MCP 工具调用能力。
 
-该插件允许机器人连接多个 MCP 服务器（如 GitHub、Postgres、Puppeteer 等），获取并调用 MCP 工具，并将工具以 OpenAI function calling 格式暴露给其他插件使用。
+该插件允许机器人连接多个 MCP 服务器，获取并调用 MCP 工具，并将工具以 OpenAI function calling 格式暴露给其他插件使用。
 
 ## 💿 安装
 
@@ -211,18 +211,6 @@ TOOL_SCHEMA_OVERRIDE='{
 - 在 `description` 中详细列出支持的 `server` 和 `tool`，这样 LLM 才能在用户问 "看看麦当劳有什么活动" 时，正确生成 `/mcp mcd campaign-calender` 的调用。
 - `format` 字段指导 nonebot-plugin-dify 如何将 LLM 的意图转换为 NoneBot 命令。
 
-
-## 📋 支持的 MCP 服务器
-
-| 服务器 | 描述 | 安装命令 |
-|--------|------|----------|
-| memory | 知识图谱记忆 | `npx -y @anthropic/mcp-memory` |
-| github | GitHub 操作 | `npx -y @anthropic/mcp-github` |
-| filesystem | 文件系统 | `npx -y @anthropic/mcp-filesystem` |
-| postgres | PostgreSQL | `npx -y @anthropic/mcp-postgres` |
-| puppeteer | 网页浏览器 | `npx -y @anthropic/mcp-puppeteer` |
-
-更多 MCP 服务器请参考 [MCP Servers](https://github.com/modelcontextprotocol/servers)。
 
 ## 许可证
 

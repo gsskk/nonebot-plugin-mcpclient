@@ -1,6 +1,6 @@
 [project]
 name = "nonebot-plugin-mcpclient"
-version = "0.1.0"
+version = "0.1.1"
 description = "NoneBot2 MCP Client Plugin - 提供 MCP 工具调用能力"
 readme = "README.md"
 requires-python = ">=3.10"
@@ -11,10 +11,9 @@ authors = [
 license = { file = "LICENSE" }
 
 dependencies = [
-    "nonebot2>=2.0.0",
+    "nonebot2>=2.3.0",
     "nonebot-plugin-alconna>=0.50.2",
     "mcp>=1.0.0",
-    "pydantic>=2.0.0",
     "anyio>=4.0.0",
 ]
 

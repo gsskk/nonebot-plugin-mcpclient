@@ -3,7 +3,7 @@
 import json
 from typing import Any, Literal
 
-from pydantic import BaseModel, Field, field_validator
+from pydantic import BaseModel, Field, validator
 
 
 class MCPServerConfig(BaseModel):
@@ -54,8 +54,7 @@ class Config(BaseModel):
     mcp_tool_timeout: int = 30
     mcp_cache_ttl: int = 3600
 
-    @field_validator("mcp_servers", mode="before")
-    @classmethod
+    @validator("mcp_servers", pre=True)
     def parse_mcp_servers(cls, v: Any) -> dict[str, Any]:
         """Parse mcp_servers from JSON string if needed."""
         if isinstance(v, str):

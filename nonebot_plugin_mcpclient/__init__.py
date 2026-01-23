@@ -7,7 +7,7 @@
 from typing import Any
 
 from nonebot import get_driver, logger, require
-from nonebot.plugin import PluginMetadata, inherit_supported_adapters
+from nonebot.plugin import PluginMetadata, get_plugin_config, inherit_supported_adapters
 
 # 确保依赖的插件已加载
 require("nonebot_plugin_alconna")
@@ -18,7 +18,7 @@ from .config import Config, MCPServerConfig
 # 导入命令模块以注册命令
 from . import commands  # noqa: F401
 
-__version__ = "0.1.0"
+__version__ = "0.1.1"
 
 __plugin_meta__ = PluginMetadata(
     name="MCP Client",
@@ -45,7 +45,7 @@ _client = MCPClient.get_instance()
 async def _startup() -> None:
     """启动时加载配置并初始化工具缓存."""
     try:
-        config = Config.model_validate(_driver.config.model_dump())
+        config = get_plugin_config(Config)
         _client.configure(config.mcp_servers, config.mcp_tool_timeout)
 
         if config.mcp_servers:

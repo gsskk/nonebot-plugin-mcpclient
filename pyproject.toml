@@ -1,6 +1,6 @@
 [project]
 name = "nonebot-plugin-mcpclient"
-version = "0.1.1"
+version = "0.1.2"
 description = "NoneBot2 MCP Client Plugin - 提供 MCP 工具调用能力"
 readme = "README.md"
 requires-python = ">=3.10"

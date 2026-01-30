@@ -18,7 +18,7 @@ from .config import Config, MCPServerConfig
 # 导入命令模块以注册命令
 from . import commands  # noqa: F401
 
-__version__ = "0.1.1"
+__version__ = "0.1.2"
 
 __plugin_meta__ = PluginMetadata(
     name="MCP Client",
